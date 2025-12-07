@@ -45,7 +45,17 @@ cp .env.example .env
 
 4. Update the `.env` file with your configuration values.
 
-5. Run the development server:
+5. Set up the database:
+
+```bash
+# Generate Prisma client
+npm run db:generate
+
+# Run migrations
+npm run db:migrate
+```
+
+6. Run the development server:
 
 ```bash
 npm run dev
@@ -86,20 +96,29 @@ npm run lint
 
 # Format code with Prettier
 npx prettier --write .
+
+# Database commands
+npm run db:generate   # Generate Prisma client
+npm run db:migrate    # Run migrations
+npm run db:push       # Push schema changes (dev only)
+npm run db:studio     # Open Prisma Studio GUI
 ```
 
 ## Project Structure
 
 ```
-src/
-├── app/                    # Next.js App Router pages and layouts
-├── components/
-│   ├── ui/                 # Reusable UI components (shadcn/ui)
-│   └── features/           # Feature-specific components
-├── lib/
-│   ├── services/           # Business logic services
-│   └── validations/        # Zod validation schemas
-└── types/                  # TypeScript type definitions
+├── prisma/
+│   └── schema.prisma       # Database schema
+├── src/
+│   ├── app/                # Next.js App Router pages and layouts
+│   ├── components/
+│   │   ├── ui/             # Reusable UI components (shadcn/ui)
+│   │   └── features/       # Feature-specific components
+│   ├── lib/
+│   │   ├── db.ts           # Prisma client singleton
+│   │   ├── services/       # Business logic services
+│   │   └── validations/    # Zod validation schemas
+│   └── types/              # TypeScript type definitions
 ```
 
 ## License
